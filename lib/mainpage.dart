@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'coindata.dart';
+import 'constants.dart';
 
 class PricePage extends StatefulWidget {
   @override
@@ -43,7 +44,13 @@ class _PricePageState extends State<PricePage> {
     }
     return DropdownButton(
       focusColor: Colors.purple,
-      elevation: 100,
+      iconEnabledColor: Colors.black,
+      icon: Icon(Icons.arrow_downward),
+      style: currencyBar,
+      underline: Container(
+        color: Colors.purple,
+      ),
+      isDense: true,
       value: v,
       items: newList,
       onChanged: (value){
@@ -69,21 +76,34 @@ class _PricePageState extends State<PricePage> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            ExchangeCard(price: isWaiting? '?':price[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
-            ExchangeCard(price: isWaiting? '?':price[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
-            ExchangeCard(price: isWaiting? '?':price[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
-            Container(
-              height: 150.0,
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(bottom: 10.0),
-              color: Colors.purple,
-              child: getDropdownlist()
-            )
-          ],
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              ExchangeCard(price: isWaiting? '?':price[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
+              ExchangeCard(price: isWaiting? '?':price[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
+              ExchangeCard(price: isWaiting? '?':price[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
+              Container(
+                height: 100.0,
+                alignment: Alignment.center,
+                color: Colors.purple,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Select Currency To Convert',
+                      style: currencyBar,
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    getDropdownlist()
+                  ],
+                )
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -111,10 +131,7 @@ class ExchangeCard extends StatelessWidget {
           child: Text(
             '1 $coinName = $price $currencyName',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
+            style: cardBar
           ),
         ),
       ),
