@@ -7,13 +7,14 @@ class CoinRate{
   String price;
   Future getPrice(crypto,currency)async{
 
-    url = 'https://rest.coinapi.io/v1/exchangerate/$crypto/$currency?apikey=YOUR API KEY';
+    url = 'https://rest.coinapi.io/v1/exchangerate/$crypto/$currency?apikey=Your api key here';
 
    try {
      Response response = await get(url);
      if (response.statusCode == 200) {
        decodedData = jsonDecode(response.body);
        price = decodedData['rate'].toStringAsFixed(2);
+       print(response.statusCode);
        return price;
      }
      else {

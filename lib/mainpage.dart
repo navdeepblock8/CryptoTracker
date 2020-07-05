@@ -9,17 +9,24 @@ class PricePage extends StatefulWidget {
 
 class _PricePageState extends State<PricePage> {
   String v = 'USD';
-  var data;
-  var coinPrice;
-  String price;
+
+  Map <String,String> price ={};
+  bool isWaiting = true;
   CoinData coins = CoinData();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    priceList();
   }
-  void priceList(){
-    coins.exchangeRate(v);
+  void priceList()async{
+    isWaiting = true;
+    await coins.exchangeRate(v);
+    setState(() {
+      price = exchangerate;
+      isWaiting = false;
+    });
+
 
   }
 
@@ -40,10 +47,11 @@ class _PricePageState extends State<PricePage> {
       value: v,
       items: newList,
       onChanged: (value){
-
+        isWaiting =true;
         setState(() {
           v = value;
           priceList();
+          isWaiting = false;
         });
       },
     );
@@ -65,9 +73,9 @@ class _PricePageState extends State<PricePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            ExchangeCard(price: exchangerate[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
-            ExchangeCard(price: exchangerate[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
-            ExchangeCard(price: exchangerate[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
+            ExchangeCard(price: isWaiting? '?':price[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
+            ExchangeCard(price: isWaiting? '?':price[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
+            ExchangeCard(price: isWaiting? '?':price[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
             Container(
               height: 150.0,
               alignment: Alignment.center,
