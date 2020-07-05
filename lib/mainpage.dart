@@ -77,32 +77,40 @@ class _PricePageState extends State<PricePage> {
           centerTitle: true,
         ),
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              ExchangeCard(price: isWaiting? '?':price[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
-              ExchangeCard(price: isWaiting? '?':price[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
-              ExchangeCard(price: isWaiting? '?':price[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
-              Container(
-                height: 100.0,
-                alignment: Alignment.center,
-                color: Colors.purple,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Select Currency To Convert',
-                      style: currencyBar,
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    getDropdownlist()
-                  ],
-                )
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/bitcoin.jpg'),
+                fit: BoxFit.cover,
               )
-            ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ExchangeCard(price: isWaiting? '?':price[cryptoList[0]], currencyName: v,coinName: cryptoList[0],),
+                ExchangeCard(price: isWaiting? '?':price[cryptoList[1]],currencyName: v,coinName: cryptoList[1],),
+                ExchangeCard(price: isWaiting? '?':price[cryptoList[2]],currencyName: v,coinName: cryptoList[2],),
+                Container(
+                  height: 100.0,
+                  alignment: Alignment.center,
+                  color: Colors.purple,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Select Currency To Convert',
+                        style: currencyBar,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      getDropdownlist()
+                    ],
+                  )
+                )
+              ],
+            ),
           ),
         ),
       ),
