@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'mainpage.dart';
+import 'screens/mainpage.dart';
 void main() {
   runApp(PricePage());
 }

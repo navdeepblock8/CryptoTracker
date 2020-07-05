@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'coindata.dart';
-import 'constants.dart';
+import '../services/coindata.dart';
+import '../utilities/constants.dart';
 
 class PricePage extends StatefulWidget {
   @override
